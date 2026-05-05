@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CloudVision Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>CloudVision</h1>
+    <p>AI-Assisted Private Image Sharing Platform</p>
+  </header>
+
+  <main class="dashboard">
+    <section class="card upload-card">
+      <h2>Upload Image</h2>
+      <p>Select an image to upload to Azure Blob Storage and save metadata in Cosmos DB.</p>
+
+      <input type="file" id="imageInput" accept="image/*">
+      <button onclick="uploadImage()">Upload & Analyse</button>
+
+      <p id="message"></p>
+    </section>
+
+    <section class="card preview-card">
+      <h2>Image Preview</h2>
+      <img id="preview" src="" alt="Image preview">
+    </section>
+
+    <section class="card">
+      <h2>AI Processing</h2>
+      <div class="badges">
+        <span class="badge">AI Tagging</span>
+        <span class="badge success">Moderation Approved</span>
+        <span class="badge">Cosmos DB Metadata</span>
+        <span class="badge">Blob Storage</span>
+      </div>
+    </section>
+
+    <section class="card metadata-card">
+      <h2>Generated Metadata</h2>
+      <pre id="metadata">No image uploaded yet.</pre>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
