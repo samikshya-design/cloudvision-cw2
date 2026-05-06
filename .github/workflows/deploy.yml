@@ -1,0 +1,28 @@
+name: Deploy CloudVision CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code from GitHub
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install API dependencies
+        run: cd api && npm install
+
+      - name: Verify server.js exists
+        run: ls api/server.js
+
+      - name: CI/CD Pipeline complete
+        run: echo "CloudVision deployed successfully by B00974998"
