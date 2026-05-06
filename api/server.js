@@ -115,6 +115,27 @@ app.delete("/api/images/:id/:userId", async (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
+// PUT /api/images/:id/:userId — Update image metadata
+app.put("/api/images/:id/:userId", async (req, res) => {
+  try {
+    const { id, userId } = req.params;
+    const updates = req.body;
+
+    const { resource: existing } = await container.item(id, userId).read();
+    if (!existing) {
+      return res.status(404).json({ error: "Image not found" });
+    }
+
+    const updated = { ...existing, ...updates };
+    const { resource } = await container.item(id, userId).replace(updated);
+
+    res.json({ message: "Image updated successfully", data: resource });
+  } catch (error) {
+    console.error("Update error:", error.message);
+    res.status(500).json({ error: "Update failed", details: error.message });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`CloudVision API running on http://localhost:${PORT}`);
 });
